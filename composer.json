@@ -1,16 +1,20 @@
 {
-  "name": "austinsmorris/doctrine-dbal-datetimeutc",
+  "name": "shapecode/doctrine-dbal-datetimeutc",
   "description": "A custom Doctine DBAL type to use PHP DateTime objects set to the UTC timezone.",
   "keywords": ["Doctrine", "DBAL", "DateTime", "datetime", "UTC"],
   "authors": [
     {
       "name": "Austin Morris",
       "email": "austin.morris@gmail.com"
+    },
+    {
+      "name": "Nikita Loges",
+      "email": "git@loges.one"
     }
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.3",
+    "php": "^7.3|^8.0",
     "doctrine/dbal": "~2.4|~3.0"
   },
   "require-dev": {
@@ -21,8 +25,10 @@
     "phpstan/phpstan-deprecation-rules": "~0.12",
     "phpstan/phpstan-phpunit": "~0.12",
     "phpstan/phpstan-strict-rules": "~0.12",
-    "maglnet/composer-require-checker": "^2.0",
     "phpunit/phpunit": "^9.4"
+  },
+  "replace": {
+    "austinsmorris/doctrine-dbal-datetimeutc": "self.version"
   },
   "autoload": {
     "psr-4": {
@@ -36,14 +42,12 @@
   },
   "scripts": {
     "check": [
-      "@crc",
       "@cs-fix",
       "@cs-check",
       "@phpstan",
       "@phpunit"
     ],
     "phpstan": "phpstan analyse --ansi",
-    "crc": "vendor/bin/composer-require-checker --config-file=./composer-require-checker.json --ansi",
     "phpunit": "phpunit --colors=always",
     "cs-check": "phpcs -s",
     "cs-fix": "phpcbf"
