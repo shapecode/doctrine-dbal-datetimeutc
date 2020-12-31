@@ -51,5 +51,19 @@
     "phpunit": "phpunit --colors=always",
     "cs-check": "phpcs -s",
     "cs-fix": "phpcbf"
-  }
+  },
+  "funding": [
+    {
+      "type": "github",
+      "url": "http://github.com/sponsors/nicklog"
+    },
+    {
+      "type": "paypal",
+      "url": "http://paypal.me/nloges"
+    },
+    {
+      "type": "liberapay",
+      "url": "https://liberapay.com/nicklog"
+    }
+  ]
 }

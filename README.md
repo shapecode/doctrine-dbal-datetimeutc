@@ -1,7 +1,15 @@
 doctrine-dbal-datetimeutc
 =========================
 
-[![Build Status](https://travis-ci.org/austinsmorris/doctrine-dbal-datetimeutc.svg?branch=master)](https://travis-ci.org/austinsmorris/doctrine-dbal-datetimeutc)
+[![paypal](https://img.shields.io/badge/Donate-Paypal-blue.svg)](http://paypal.me/nloges)
+
+[![PHP Version](https://img.shields.io/packagist/php-v/shapecode/doctrine-dbal-datetimeutc.svg)](https://packagist.org/packages/shapecode/doctrine-dbal-datetimeutc)
+[![Latest Stable Version](https://img.shields.io/packagist/v/shapecode/doctrine-dbal-datetimeutc.svg?label=stable)](https://packagist.org/packages/shapecode/doctrine-dbal-datetimeutc)
+[![Latest Unstable Version](https://img.shields.io/packagist/vpre/shapecode/doctrine-dbal-datetimeutc.svg?label=unstable)](https://packagist.org/packages/shapecode/doctrine-dbal-datetimeutc)
+[![Total Downloads](https://img.shields.io/packagist/dt/shapecode/doctrine-dbal-datetimeutc.svg)](https://packagist.org/packages/shapecode/doctrine-dbal-datetimeutc)
+[![Monthly Downloads](https://img.shields.io/packagist/dm/shapecode/doctrine-dbal-datetimeutc.svg)](https://packagist.org/packages/shapecode/doctrine-dbal-datetimeutc)
+[![Daily Downloads](https://img.shields.io/packagist/dd/shapecode/doctrine-dbal-datetimeutc.svg)](https://packagist.org/packages/shapecode/doctrine-dbal-datetimeutc)
+[![License](https://img.shields.io/packagist/l/shapecode/doctrine-dbal-datetimeutc.svg)](https://packagist.org/packages/shapecode/cron-bundle)
 
 A Doctine DBAL [Custom Mapping Type](http://docs.doctrine-project.org/projects/doctrine-orm/en/latest/cookbook/custom-mapping-types.html) allowing the use of PHP DateTime objects automatically set to the UTC timezone.
 
