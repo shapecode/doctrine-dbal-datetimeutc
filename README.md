@@ -9,13 +9,17 @@ Databases [suck at timezones](http://derickrethans.nl/storing-date-time-in-datab
 
 Install via composer:
 
-    composer require austinsmorris/doctrine-dbal-datetimeutc:~1.0
-  
+```bash
+composer req shapecode/doctrine-dbal-datetimeutc
+``` 
+
 Add the custom type before instantiating your entity manager:
 
 ```php
 use Doctrine\DBAL\Types\Type;
-Type::addType('datetimeutc', 'ASM\Doctrine\DBAL\Types\DateTimeUTCType');
+use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
+
+Type::addType(DateTimeUTCType::DATETIMEUTC, DateTimeUTCType::class);
 ```
 
 Enjoy!

@@ -2,9 +2,8 @@
 
 declare(strict_types=1);
 
-namespace ASM\Doctrine\DBAL\Tests\Types;
+namespace Shapecode\Doctrine\DBAL\Tests\Types;
 
-use ASM\Doctrine\DBAL\Types\DateTimeUTCType;
 use DateTime;
 use DateTimeZone;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
@@ -12,6 +11,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
 use PHPStan\Testing\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
 
 use function assert;
 

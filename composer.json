@@ -32,12 +32,12 @@
   },
   "autoload": {
     "psr-4": {
-      "ASM\\Doctrine\\DBAL\\": "src/"
+      "Shapecode\\Doctrine\\DBAL\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "ASM\\Doctrine\\DBAL\\Tests\\": "tests/"
+      "Shapecode\\Doctrine\\DBAL\\Tests\\": "tests/"
     }
   },
   "scripts": {

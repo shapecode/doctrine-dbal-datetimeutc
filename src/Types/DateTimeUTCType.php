@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace ASM\Doctrine\DBAL\Types;
+namespace Shapecode\Doctrine\DBAL\Types;
 
 use DateTime;
 use DateTimeZone;
