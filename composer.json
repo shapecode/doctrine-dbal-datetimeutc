@@ -52,6 +52,11 @@
     "cs-check": "phpcs -s",
     "cs-fix": "phpcbf"
   },
+  "extra": {
+    "branch-alias": {
+      "dev-master": "3.0-dev"
+    }
+  },
   "funding": [
     {
       "type": "github",
