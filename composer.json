@@ -1,7 +1,13 @@
 {
   "name": "shapecode/doctrine-dbal-datetimeutc",
   "description": "A custom Doctine DBAL type to use PHP DateTime objects set to the UTC timezone.",
-  "keywords": ["Doctrine", "DBAL", "DateTime", "datetime", "UTC"],
+  "keywords": [
+    "Doctrine",
+    "DBAL",
+    "DateTime",
+    "datetime",
+    "UTC"
+  ],
   "authors": [
     {
       "name": "Austin Morris",
@@ -14,18 +20,18 @@
   ],
   "license": "MIT",
   "require": {
-    "php": "^7.3|^8.0",
-    "doctrine/dbal": "~2.4|~3.0"
+    "php": "^8.1",
+    "doctrine/dbal": "^2.4|^3.3"
   },
   "require-dev": {
-    "doctrine/coding-standard": "^8.2",
+    "doctrine/coding-standard": "^9.0",
     "roave/security-advisories": "dev-master",
-    "squizlabs/php_codesniffer": "^3.5",
-    "phpstan/phpstan": "~0.12",
-    "phpstan/phpstan-deprecation-rules": "~0.12",
-    "phpstan/phpstan-phpunit": "~0.12",
-    "phpstan/phpstan-strict-rules": "~0.12",
-    "phpunit/phpunit": "^9.4"
+    "squizlabs/php_codesniffer": "^3.6",
+    "phpstan/phpstan": "^1.7",
+    "phpstan/phpstan-deprecation-rules": "^1.0",
+    "phpstan/phpstan-phpunit": "^1.1",
+    "phpstan/phpstan-strict-rules": "^1.2",
+    "phpunit/phpunit": "^9.5"
   },
   "replace": {
     "austinsmorris/doctrine-dbal-datetimeutc": "self.version"
@@ -54,7 +60,7 @@
   },
   "extra": {
     "branch-alias": {
-      "dev-master": "3.0-dev"
+      "dev-master": "4.0-dev"
     }
   },
   "funding": [
@@ -70,5 +76,10 @@
       "type": "liberapay",
       "url": "https://liberapay.com/nicklog"
     }
-  ]
+  ],
+  "config": {
+    "allow-plugins": {
+      "dealerdirect/phpcodesniffer-composer-installer": true
+    }
+  }
 }

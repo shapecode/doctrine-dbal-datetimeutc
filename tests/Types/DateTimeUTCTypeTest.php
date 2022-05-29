@@ -9,19 +9,17 @@ use DateTimeZone;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Type;
-use PHPStan\Testing\TestCase;
 use PHPUnit\Framework\MockObject\MockObject;
+use PHPUnit\Framework\TestCase;
 use Shapecode\Doctrine\DBAL\Types\DateTimeUTCType;
 
 use function assert;
 
 class DateTimeUTCTypeTest extends TestCase
 {
-    /** @var AbstractPlatform|MockObject */
-    protected $abstractPlatform;
+    protected AbstractPlatform & MockObject $abstractPlatform;
 
-    /** @var DateTimeUTCType */
-    protected $dateTimeUTCType;
+    protected DateTimeUTCType $dateTimeUTCType;
 
     public function setUp(): void
     {
@@ -61,18 +59,28 @@ class DateTimeUTCTypeTest extends TestCase
         self::assertNull($this->dateTimeUTCType->convertToDatabaseValue(null, $this->abstractPlatform));
     }
 
+    public function testConvertToDatabaseValueWrongType(): void
+    {
+        $this->expectException(ConversionException::class);
+
+        self::assertNull($this->dateTimeUTCType->convertToDatabaseValue(1234, $this->abstractPlatform));
+    }
+
     public function testConvertToPHPValueReturnsUTCDateTime(): void
     {
         self::assertEquals(
             'UTC',
-            $this->dateTimeUTCType->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
-                ->getTimezone()->getName()
+            $this->dateTimeUTCType
+                ->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
+                ?->getTimezone()
+                ->getName()
         );
 
         self::assertEquals(
             '2014-11-27 13:16:31',
-            $this->dateTimeUTCType->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
-                ->setTimezone(new DateTimeZone('America/New_York'))
+            $this->dateTimeUTCType
+                ->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
+                ?->setTimezone(new DateTimeZone('America/New_York'))
                 ->format($this->abstractPlatform->getDateTimeFormatString())
         );
     }
@@ -81,14 +89,17 @@ class DateTimeUTCTypeTest extends TestCase
     {
         self::assertEquals(
             'UTC',
-            $this->dateTimeUTCType->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
-                ->getTimezone()->getName()
+            $this->dateTimeUTCType
+                ->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
+                ?->getTimezone()
+                ->getName()
         );
 
         self::assertEquals(
             '2014-11-27 13:16:31',
-            $this->dateTimeUTCType->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
-                ->setTimezone(new DateTimeZone('America/New_York'))
+            $this->dateTimeUTCType
+                ->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
+                ?->setTimezone(new DateTimeZone('America/New_York'))
                 ->format($this->abstractPlatform->getDateTimeFormatString())
         );
     }
@@ -103,13 +114,13 @@ class DateTimeUTCTypeTest extends TestCase
 
         self::assertEquals(
             'UTC',
-            $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)->getTimezone()->getName()
+            $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)?->getTimezone()->getName()
         );
 
         self::assertEquals(
             '2014-11-27 18:16:31',
             $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)
-                ->format($this->abstractPlatform->getDateTimeFormatString())
+                ?->format($this->abstractPlatform->getDateTimeFormatString())
         );
     }
 
@@ -122,5 +133,11 @@ class DateTimeUTCTypeTest extends TestCase
     {
         $this->expectException(ConversionException::class);
         self::assertNull($this->dateTimeUTCType->convertToPHPValue('foo', $this->abstractPlatform));
+    }
+
+    public function testConvertToPHPValueThrowsWrongType(): void
+    {
+        $this->expectException(ConversionException::class);
+        self::assertNull($this->dateTimeUTCType->convertToPHPValue(123, $this->abstractPlatform));
     }
 }
