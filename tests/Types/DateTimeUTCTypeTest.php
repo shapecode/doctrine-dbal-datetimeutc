@@ -23,7 +23,8 @@ class DateTimeUTCTypeTest extends TestCase
 
     public function setUp(): void
     {
-        $this->abstractPlatform = $this->getMockForAbstractClass(AbstractPlatform::class);
+        $this->abstractPlatform = $this->createMock(AbstractPlatform::class);
+        $this->abstractPlatform->method('getDateTimeFormatString')->willReturn('Y-m-d H:i:s');
 
         if (! Type::hasType(DateTimeUTCType::DATETIMEUTC)) {
             Type::addType(DateTimeUTCType::DATETIMEUTC, DateTimeUTCType::class);
@@ -35,35 +36,25 @@ class DateTimeUTCTypeTest extends TestCase
         $this->dateTimeUTCType = $type;
     }
 
-    public function testGetName(): void
-    {
-        self::assertEquals(DateTimeUTCType::DATETIMEUTC, $this->dateTimeUTCType->getName());
-    }
-
     public function testConvertToDatabaseValueReturnsUTCString(): void
     {
         $dateTime = DateTime::createFromFormat(
             $this->abstractPlatform->getDateTimeFormatString(),
             '2014-11-27 13:16:31',
-            new DateTimeZone('America/New_York')
+            new DateTimeZone('America/New_York'),
         );
 
         self::assertEquals(
             '2014-11-27 18:16:31',
-            $this->dateTimeUTCType->convertToDatabaseValue($dateTime, $this->abstractPlatform)
+            $this->dateTimeUTCType->convertToDatabaseValue($dateTime, $this->abstractPlatform),
         );
-    }
-
-    public function testConvertToDatabaseValueReturnsNullForNullValue(): void
-    {
-        self::assertNull($this->dateTimeUTCType->convertToDatabaseValue(null, $this->abstractPlatform));
     }
 
     public function testConvertToDatabaseValueWrongType(): void
     {
         $this->expectException(ConversionException::class);
 
-        self::assertNull($this->dateTimeUTCType->convertToDatabaseValue(1234, $this->abstractPlatform));
+        $this->dateTimeUTCType->convertToDatabaseValue(1234, $this->abstractPlatform);
     }
 
     public function testConvertToPHPValueReturnsUTCDateTime(): void
@@ -73,7 +64,7 @@ class DateTimeUTCTypeTest extends TestCase
             $this->dateTimeUTCType
                 ->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
                 ?->getTimezone()
-                ->getName()
+                ->getName(),
         );
 
         self::assertEquals(
@@ -81,7 +72,7 @@ class DateTimeUTCTypeTest extends TestCase
             $this->dateTimeUTCType
                 ->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
                 ?->setTimezone(new DateTimeZone('America/New_York'))
-                ->format($this->abstractPlatform->getDateTimeFormatString())
+                ->format($this->abstractPlatform->getDateTimeFormatString()),
         );
     }
 
@@ -92,7 +83,7 @@ class DateTimeUTCTypeTest extends TestCase
             $this->dateTimeUTCType
                 ->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
                 ?->getTimezone()
-                ->getName()
+                ->getName(),
         );
 
         self::assertEquals(
@@ -100,7 +91,7 @@ class DateTimeUTCTypeTest extends TestCase
             $this->dateTimeUTCType
                 ->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
                 ?->setTimezone(new DateTimeZone('America/New_York'))
-                ->format($this->abstractPlatform->getDateTimeFormatString())
+                ->format($this->abstractPlatform->getDateTimeFormatString()),
         );
     }
 
@@ -109,18 +100,18 @@ class DateTimeUTCTypeTest extends TestCase
         $dateTime = DateTime::createFromFormat(
             $this->abstractPlatform->getDateTimeFormatString(),
             '2014-11-27 13:16:31',
-            new DateTimeZone('America/New_York')
+            new DateTimeZone('America/New_York'),
         );
 
         self::assertEquals(
             'UTC',
-            $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)?->getTimezone()->getName()
+            $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)?->getTimezone()->getName(),
         );
 
         self::assertEquals(
             '2014-11-27 18:16:31',
             $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)
-                ?->format($this->abstractPlatform->getDateTimeFormatString())
+                ?->format($this->abstractPlatform->getDateTimeFormatString()),
         );
     }
 

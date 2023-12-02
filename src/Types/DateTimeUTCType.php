@@ -21,12 +21,7 @@ class DateTimeUTCType extends DateTimeType
 {
     public const DATETIMEUTC = 'datetimeutc';
 
-    public function getName(): string
-    {
-        return self::DATETIMEUTC;
-    }
-
-    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): ?string
+    public function convertToDatabaseValue(mixed $value, AbstractPlatform $platform): string|null
     {
         if ($value === null) {
             return null;
@@ -35,8 +30,8 @@ class DateTimeUTCType extends DateTimeType
         if (! $value instanceof DateTimeInterface) {
             throw ConversionException::conversionFailedInvalidType(
                 $value,
-                $this->getName(),
-                ['null', DateTimeInterface::class]
+                self::DATETIMEUTC,
+                ['null', DateTimeInterface::class],
             );
         }
 
@@ -45,7 +40,7 @@ class DateTimeUTCType extends DateTimeType
             ->format($platform->getDateTimeFormatString());
     }
 
-    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): ?DateTime
+    public function convertToPHPValue(mixed $value, AbstractPlatform $platform): DateTime|null
     {
         if ($value === null) {
             return null;
@@ -58,14 +53,14 @@ class DateTimeUTCType extends DateTimeType
         if (! is_string($value)) {
             throw ConversionException::conversionFailedUnserialization(
                 DateTime::class,
-                sprintf('wrong type "%s"', get_debug_type($value))
+                sprintf('wrong type "%s"', get_debug_type($value)),
             );
         }
 
         $dateTime = DateTime::createFromFormat(
             $platform->getDateTimeFormatString(),
             $value,
-            new DateTimeZone('UTC')
+            new DateTimeZone('UTC'),
         );
 
         if ($dateTime === false) {
@@ -75,8 +70,8 @@ class DateTimeUTCType extends DateTimeType
         if ($dateTime === false) {
             throw ConversionException::conversionFailedFormat(
                 $value,
-                $this->getName(),
-                $platform->getDateTimeFormatString()
+                self::DATETIMEUTC,
+                $platform->getDateTimeFormatString(),
             );
         }
 
