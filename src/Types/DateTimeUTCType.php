@@ -9,13 +9,13 @@ use DateTimeImmutable;
 use DateTimeInterface;
 use DateTimeZone;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
-use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeType;
+use Doctrine\DBAL\Types\Exception\InvalidFormat;
+use Doctrine\DBAL\Types\Exception\InvalidType;
+use Doctrine\DBAL\Types\Exception\ValueNotConvertible;
 
 use function date_create;
-use function get_debug_type;
 use function is_string;
-use function sprintf;
 
 class DateTimeUTCType extends DateTimeType
 {
@@ -28,7 +28,7 @@ class DateTimeUTCType extends DateTimeType
         }
 
         if (! $value instanceof DateTimeInterface) {
-            throw ConversionException::conversionFailedInvalidType(
+            throw InvalidType::new(
                 $value,
                 self::DATETIMEUTC,
                 ['null', DateTimeInterface::class],
@@ -51,9 +51,9 @@ class DateTimeUTCType extends DateTimeType
         }
 
         if (! is_string($value)) {
-            throw ConversionException::conversionFailedUnserialization(
+            throw ValueNotConvertible::new(
+                $value,
                 DateTime::class,
-                sprintf('wrong type "%s"', get_debug_type($value)),
             );
         }
 
@@ -68,7 +68,7 @@ class DateTimeUTCType extends DateTimeType
         }
 
         if ($dateTime === false) {
-            throw ConversionException::conversionFailedFormat(
+            throw InvalidFormat::new(
                 $value,
                 self::DATETIMEUTC,
                 $platform->getDateTimeFormatString(),
@@ -76,10 +76,5 @@ class DateTimeUTCType extends DateTimeType
         }
 
         return $dateTime;
-    }
-
-    public function requiresSQLCommentHint(AbstractPlatform $platform): bool
-    {
-        return true;
     }
 }
