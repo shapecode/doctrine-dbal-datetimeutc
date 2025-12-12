@@ -1,90 +1,87 @@
 {
-  "name": "shapecode/doctrine-dbal-datetimeutc",
-  "description": "A custom Doctine DBAL type to use PHP DateTime objects set to the UTC timezone.",
-  "keywords": [
-    "Doctrine",
-    "DBAL",
-    "DateTime",
-    "datetime",
-    "UTC"
-  ],
-  "authors": [
-    {
-      "name": "Austin Morris",
-      "email": "austin.morris@gmail.com"
-    },
-    {
-      "name": "Nikita Loges",
-      "email": "git@loges.one"
-    }
-  ],
-  "license": "MIT",
-  "require": {
-    "php": "^8.2",
-    "doctrine/dbal": "^4.0"
-  },
-  "require-dev": {
-    "doctrine/coding-standard": "^12.0",
-    "roave/security-advisories": "dev-master",
-    "squizlabs/php_codesniffer": "^3.9",
-    "maglnet/composer-require-checker": "^4.10",
-    "phpstan/phpstan": "^1.10",
-    "phpstan/phpstan-deprecation-rules": "^1.1",
-    "phpstan/phpstan-phpunit": "^1.3",
-    "phpstan/phpstan-strict-rules": "^1.5",
-    "phpunit/phpunit": "^10.5",
-    "icanhazstring/composer-unused": "^0.8"
-  },
-  "replace": {
-    "austinsmorris/doctrine-dbal-datetimeutc": "self.version"
-  },
-  "autoload": {
-    "psr-4": {
-      "Shapecode\\Doctrine\\DBAL\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Shapecode\\Doctrine\\DBAL\\Tests\\": "tests/"
-    }
-  },
-  "scripts": {
-    "check": [
-      "@crc",
-      "@unused",
-      "@cs-check",
-      "@phpstan",
-      "@phpunit"
-    ],
-    "unused": "vendor/bin/composer-unused",
-    "crc": "./vendor/bin/composer-require-checker --config-file=./composer-require-checker.json",
-    "phpstan": "phpstan analyse --ansi",
-    "phpunit": "phpunit --colors=always",
-    "cs-check": "phpcs -s",
-    "cs-fix": "phpcbf"
-  },
-  "extra": {
-    "branch-alias": {
-      "dev-master": "4.0-dev"
-    }
-  },
-  "funding": [
-    {
-      "type": "github",
-      "url": "http://github.com/sponsors/nicklog"
-    },
-    {
-      "type": "paypal",
-      "url": "http://paypal.me/nloges"
-    },
-    {
-      "type": "liberapay",
-      "url": "https://liberapay.com/nicklog"
-    }
-  ],
-  "config": {
-    "allow-plugins": {
-      "dealerdirect/phpcodesniffer-composer-installer": true
-    }
-  }
+	"name": "shapecode/doctrine-dbal-datetimeutc",
+	"description": "A custom Doctine DBAL type to use PHP DateTime objects set to the UTC timezone.",
+	"keywords": [
+		"Doctrine",
+		"DBAL",
+		"DateTime",
+		"datetime",
+		"UTC"
+	],
+	"authors": [
+		{
+			"name": "Austin Morris",
+			"email": "austin.morris@gmail.com"
+		},
+		{
+			"name": "Nikita Loges",
+			"email": "git@loges.one"
+		}
+	],
+	"license": "MIT",
+	"require": {
+		"php": "^8.4",
+		"doctrine/dbal": "^4.4"
+	},
+	"require-dev": {
+		"doctrine/coding-standard": "^14.0",
+		"roave/security-advisories": "dev-master",
+		"squizlabs/php_codesniffer": "^4",
+		"phpstan/phpstan": "^2.1",
+		"phpstan/phpstan-deprecation-rules": "^2.0",
+		"phpstan/phpstan-phpunit": "^2.0",
+		"phpstan/phpstan-strict-rules": "^2.0",
+		"phpunit/phpunit": "^12.5",
+		"shipmonk/composer-dependency-analyser": "^1.8.4"
+	},
+	"replace": {
+		"austinsmorris/doctrine-dbal-datetimeutc": "self.version"
+	},
+	"autoload": {
+		"psr-4": {
+			"Shapecode\\Doctrine\\DBAL\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"Shapecode\\Doctrine\\DBAL\\Tests\\": "tests/"
+		}
+	},
+	"scripts": {
+		"check": [
+			"@cda",
+			"@cs-check",
+			"@phpstan",
+			"@phpunit"
+		],
+		"phpstan": "phpstan analyse --ansi",
+		"phpunit": "phpunit --colors=always",
+		"cda": "vendor/bin/composer-dependency-analyser --config=./composer-dependency-analyser.php",
+		"cs-check": "phpcs -s",
+		"cs-fix": "phpcbf"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "4.0-dev"
+		}
+	},
+	"funding": [
+		{
+			"type": "github",
+			"url": "http://github.com/sponsors/nicklog"
+		},
+		{
+			"type": "paypal",
+			"url": "http://paypal.me/nloges"
+		},
+		{
+			"type": "liberapay",
+			"url": "https://liberapay.com/nicklog"
+		}
+	],
+	"config": {
+		"allow-plugins": {
+			"dealerdirect/phpcodesniffer-composer-installer": true
+		}
+	}
 }

@@ -19,7 +19,7 @@ use function assert;
 
 class DateTimeUTCTypeTest extends TestCase
 {
-    protected AbstractPlatform & MockObject $abstractPlatform;
+    protected AbstractPlatform&MockObject $abstractPlatform;
 
     protected DateTimeUTCType $dateTimeUTCType;
 
@@ -46,7 +46,7 @@ class DateTimeUTCTypeTest extends TestCase
             new DateTimeZone('America/New_York'),
         );
 
-        self::assertEquals(
+        self::assertSame(
             '2014-11-27 18:16:31',
             $this->dateTimeUTCType->convertToDatabaseValue($dateTime, $this->abstractPlatform),
         );
@@ -61,7 +61,7 @@ class DateTimeUTCTypeTest extends TestCase
 
     public function testConvertToPHPValueReturnsUTCDateTime(): void
     {
-        self::assertEquals(
+        self::assertSame(
             'UTC',
             $this->dateTimeUTCType
                 ->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
@@ -69,7 +69,7 @@ class DateTimeUTCTypeTest extends TestCase
                 ->getName(),
         );
 
-        self::assertEquals(
+        self::assertSame(
             '2014-11-27 13:16:31',
             $this->dateTimeUTCType
                 ->convertToPHPValue('2014-11-27 18:16:31', $this->abstractPlatform)
@@ -80,7 +80,7 @@ class DateTimeUTCTypeTest extends TestCase
 
     public function testConvertToPHPValueReturnsUTCDateTimeFromDateCreate(): void
     {
-        self::assertEquals(
+        self::assertSame(
             'UTC',
             $this->dateTimeUTCType
                 ->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
@@ -88,7 +88,7 @@ class DateTimeUTCTypeTest extends TestCase
                 ->getName(),
         );
 
-        self::assertEquals(
+        self::assertSame(
             '2014-11-27 13:16:31',
             $this->dateTimeUTCType
                 ->convertToPHPValue('Thursday, 27-Nov-2014 18:16:31', $this->abstractPlatform)
@@ -105,12 +105,12 @@ class DateTimeUTCTypeTest extends TestCase
             new DateTimeZone('America/New_York'),
         );
 
-        self::assertEquals(
+        self::assertSame(
             'UTC',
             $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)->getTimezone()->getName(),
         );
 
-        self::assertEquals(
+        self::assertSame(
             '2014-11-27 18:16:31',
             $this->dateTimeUTCType->convertToPHPValue($dateTime, $this->abstractPlatform)
                 ->format($this->abstractPlatform->getDateTimeFormatString()),
